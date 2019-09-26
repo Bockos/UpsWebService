@@ -1,0 +1,289 @@
+﻿@{
+    Layout = null;
+}
+
+@model List<UPSWebService.Models.ililcekodlari>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Casper-UPS</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+        //AJAX KULLANICAKSAN KESİNLİKLE BU JQUERY KODUNU EKLE !!!
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        .ajax-loader {
+            visibility: hidden;
+            background-color: rgba(255,255,255,0.7);
+            position: absolute;
+            z-index: +100 !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .ajax-loader img {
+                position: relative;
+                top: 50%;
+                left: 50%;
+            }
+    </style>
+
+</head>
+<body>
+    <div class="ajax-loader">
+        <img src="./img/ajax-loader.gif" class="img-responsive" />
+    </div>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Casper - UPS</a>
+            </div>
+            <!-- /.navbar-header -->
+
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">UPS VIP Servis</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            <div class="row">
+                <div class="col-lg-12">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            Talep Formu
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>Ad - Soyad</label>
+                                        <input class="form-control" placeholder="Lütfen Adınızı Giriniz" id="ShipperName">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Tel</label>
+                                        <input type="number" class="form-control" placeholder="Lütfen Telefon Numaranızı Giriniz" id="ShipperPhoneNumber">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Mail</label>
+                                        <input class="form-control" placeholder="Lütfen Mail Adresinizi Giriniz" id="ShipperEMail">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>İL</label>
+                                        <select class="form-control" id="ShipperCityCode">
+                                            @foreach (var item in Model)
+                                            {
+                                                <option value="@item.ilKodu">@item.il</option>
+                                            }
+
+                                        </select>
+                                    </div>
+                                    <div class="form-group" id="ShipperArea">
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Adres</label>
+                                        <textarea class="form-control" rows="3" placeholder="Lütfen Açık Adres Giriniz" id="ShipperAddress"></textarea>
+                                    </div>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                                <div class="col-lg-6">
+                                    <div class="form-group">
+                                        <label>IMEI NO</label>
+                                        <input class="form-control" id="ShipperSerialNumber" placeholder="Lütfen Telefonunuzun 15 Haneli Imei Numarasını Giriniz">
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Açıklama</label>
+                                        <textarea class="form-control" id="ShipperDescription" rows="3" placeholder="Lütfen cihaz ile alakalı yaşamış olduğunuz sorunları detaylı bir şekilde açıklayınız.."></textarea>
+                                    </div>
+                                    <br />
+                                    <br />
+
+                                    <p><h5>(**Şarj arızaları için cihazı şarj aleti ile birlikte göndermeniz gerekmektedir.**)</h5></p>
+                                    <br />
+                                    <br />
+                                    @*<div class="form-group">
+                                            <label>Cihazın service durumu hakkında sizinle nasıl iletişime geçelim?</label>
+                                            <div class="checkbox">
+                                                <label>
+                                                    <input type="checkbox" id="NoneContact" > İletişim istemiyorum
+                                                </label>
+                                            </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="EmailContact"> E-Mail ile
+                                                    </label>
+                                                </div>
+                                                <div class="checkbox">
+                                                    <label>
+                                                        <input type="checkbox" id="SMSContact"> SMS ile
+                                                    </label>
+                                                </div>
+                                        </div>*@
+                                    <button id="Send" class="btn btn">Gönder</button>
+                                </div>
+                                <!-- /.col-lg-6 (nested) -->
+                            </div>
+                            <!-- /.row (nested) -->
+                        </div>
+                        <!-- /.panel-body -->
+                    </div>
+                    <!-- /.panel -->
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+        </div>
+        <!-- /#page-wrapper -->
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/dist/js/sb-admin-2.js"></script>
+</body>
+</html>
+
+
+
+<script type="text/javascript" language="javascript">
+    $(document).ready(function () {
+        $("#ShipperCityCode").change(function () {
+
+            var ilKodu = $("#ShipperCityCode").val();
+
+            $("#ShipperArea").empty();
+
+            $.ajax({
+                url: '/Home/Getilce?ilKodu=' + ilKodu + '',
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+                    var Result = "<label>İlçe seç</label>";
+                    Result += "<select class='form-control' id='ShipperAreaCode'>";
+                    $.each(data, function (i, item) {
+                        Result += "<option value=" + item.ilceKodu + ">" + item.ilce + "</option>";
+                    });
+                    Result += "</select>";
+
+                    $("#ShipperArea").append(Result);
+                }
+            });
+        });
+    });
+
+
+    $(document).ready(function () {
+        $("#Send").click(function () {
+
+            var ShipperName = $("#ShipperName").val();
+            var ShipperPhoneNumber = $("#ShipperPhoneNumber").val();
+            var ShipperEMail = $("#ShipperEMail").val();
+            var ShipperCityCode = $("#ShipperCityCode").val();
+            var ShipperAreaCode = $("#ShipperAreaCode").val();
+            var ShipperAddress = $("#ShipperAddress").val();
+            var ShipperSerialNumber = $("#ShipperSerialNumber").val();
+            var ShipperDescription = $("#ShipperDescription").val();
+            var ShipperContactType = 0;
+
+            //if ($("#NoneContact").is(":checked")) {
+
+            //    $("#EmailContact").empty();
+            //    $("#SMSContact").empty();
+            //    ShipperContactType = 0;
+            //}
+            //else {
+            //    if ($("#EmailContact").is(":checked") || $("#SMSContact").is(":checked")) {
+            //        $("#NoneContact").empty();
+            //        if ($("#EmailContact").is(":checked")) {
+            //            ShipperContactType = 1;
+            //        }
+            //        if ($("#SMSContact").is(":checked")) {
+            //            ShipperContactType += 2;
+            //        }
+            //    }
+            //}
+
+            $.ajax({
+
+                beforeSend: function () {
+                    $('.ajax-loader').css("visibility", "visible");
+                },
+
+                url: '/Home/AddInfoService?ShipperName=' + ShipperName + '&ShipperAddress=' + ShipperAddress + '&ShipperCityCode=' + ShipperCityCode + '&ShipperAreaCode=' + ShipperAreaCode + '&ShipperPhoneNumber=' + ShipperPhoneNumber + '&ShipperEMail=' + ShipperEMail + '&ShipperSerialNumber=' + ShipperSerialNumber + '&ShipperDescription=' + ShipperDescription + '&ShipperContactType=' + ShipperContactType,
+                type: 'POST',
+                dataType: 'json',
+                success: function (data) {
+
+                    alert(data);
+
+                },
+
+                complete: function () {
+                    $('.ajax-loader').css("visibility", "hidden");
+                }
+
+            });
+        });
+
+
+
+        //iletişim divindekileri göster veya gösterme...
+        $("#NoneContact").click(function () {
+
+            if ($("#NoneContact").is(":checked")) {
+                $("#EmailContact").attr("disabled", true);
+                $("#SMSContact").attr("disabled", true);
+            }
+            if (!$("#NoneContact").is(":checked")) {
+                $("#EmailContact").attr("disabled", false);
+                $("#SMSContact").attr("disabled", false);
+            }
+
+
+        });
+
+    });
+
+
+
+</script>
+
+
+
+
+

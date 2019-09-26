@@ -1,0 +1,189 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="UPSIntegrationModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="B_UPSOnDemantPickup_Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="OrderDate" Type="datetime" />
+          <Property Name="CustomerName" Type="nvarchar(max)" />
+          <Property Name="CustomerPhone" Type="nvarchar(max)" />
+          <Property Name="CustomerEMail" Type="nvarchar(max)" />
+          <Property Name="CustomerState" Type="nvarchar(max)" />
+          <Property Name="CustomerCounty" Type="nvarchar(max)" />
+          <Property Name="CustomerAddress" Type="nvarchar(max)" />
+          <Property Name="SerialNumber" Type="nvarchar(max)" />
+          <Property Name="DefectDesc" Type="nvarchar(max)" />
+          <Property Name="ContactType" Type="nvarchar(max)" />
+          <Property Name="UPSTrackingNum" Type="nvarchar(max)" />
+          <Property Name="ServiceOrderId" Type="nvarchar(max)" />
+          <Property Name="ServiceLocation" Type="int" />
+          <Property Name="ServiceCustAccount" Type="nvarchar(max)" />
+          <Property Name="AxRecId" Type="nvarchar(max)" />
+          <Property Name="PartyId" Type="nvarchar(max)" />
+          <Property Name="CargoType" Type="nvarchar" MaxLength="50" />
+          <Property Name="TEMTrackingNum" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="TEMCargo_ililcekodlari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="il" Type="nvarchar" MaxLength="60" />
+          <Property Name="ilce_Semt" Type="nvarchar" MaxLength="60" />
+          <Property Name="il_kodu" Type="int" />
+          <Property Name="ilceSemt_kodu" Type="int" />
+        </EntityType>
+        <EntityType Name="UPSCargoililcekodlari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="il" Type="nvarchar" MaxLength="50" />
+          <Property Name="ilce" Type="nvarchar" MaxLength="50" />
+          <Property Name="ilKodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="ilceKodu" Type="nvarchar" MaxLength="50" />
+          <Property Name="CargoType" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="UPSIntegrationModelStoreContainer">
+          <EntitySet Name="B_UPSOnDemantPickup_Order" EntityType="Self.B_UPSOnDemantPickup_Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="TEMCargo_ililcekodlari" EntityType="Self.TEMCargo_ililcekodlari" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UPSCargoililcekodlari" EntityType="Self.UPSCargoililcekodlari" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="UPSIntegrationModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="B_UPSOnDemantPickup_Order">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="OrderDate" Type="DateTime" Precision="3" />
+          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerEMail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerCounty" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerAddress" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SerialNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DefectDesc" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ContactType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UPSTrackingNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceOrderId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ServiceLocation" Type="Int32" />
+          <Property Name="ServiceCustAccount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AxRecId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PartyId" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="CargoType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="TEMTrackingNum" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="TEMCargo_ililcekodlari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="il" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="ilce_Semt" Type="String" MaxLength="60" FixedLength="false" Unicode="true" />
+          <Property Name="il_kodu" Type="Int32" />
+          <Property Name="ilceSemt_kodu" Type="Int32" />
+        </EntityType>
+        <EntityContainer Name="UPSIntegrationEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="B_UPSOnDemantPickup_Order" EntityType="Self.B_UPSOnDemantPickup_Order" />
+          <EntitySet Name="TEMCargo_ililcekodlari" EntityType="Self.TEMCargo_ililcekodlari" />
+          <EntitySet Name="UPSCargoililcekodlari" EntityType="UPSIntegrationModel.UPSCargoililcekodlari" />
+        </EntityContainer>
+        <EntityType Name="UPSCargoililcekodlari">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="il" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ilce" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ilKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="ilceKodu" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="CargoType" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="UPSIntegrationModelStoreContainer" CdmEntityContainer="UPSIntegrationEntities">
+          <EntitySetMapping Name="B_UPSOnDemantPickup_Order">
+            <EntityTypeMapping TypeName="UPSIntegrationModel.B_UPSOnDemantPickup_Order">
+              <MappingFragment StoreEntitySet="B_UPSOnDemantPickup_Order">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="OrderDate" ColumnName="OrderDate" />
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="CustomerPhone" ColumnName="CustomerPhone" />
+                <ScalarProperty Name="CustomerEMail" ColumnName="CustomerEMail" />
+                <ScalarProperty Name="CustomerState" ColumnName="CustomerState" />
+                <ScalarProperty Name="CustomerCounty" ColumnName="CustomerCounty" />
+                <ScalarProperty Name="CustomerAddress" ColumnName="CustomerAddress" />
+                <ScalarProperty Name="SerialNumber" ColumnName="SerialNumber" />
+                <ScalarProperty Name="DefectDesc" ColumnName="DefectDesc" />
+                <ScalarProperty Name="ContactType" ColumnName="ContactType" />
+                <ScalarProperty Name="UPSTrackingNum" ColumnName="UPSTrackingNum" />
+                <ScalarProperty Name="ServiceOrderId" ColumnName="ServiceOrderId" />
+                <ScalarProperty Name="ServiceLocation" ColumnName="ServiceLocation" />
+                <ScalarProperty Name="ServiceCustAccount" ColumnName="ServiceCustAccount" />
+                <ScalarProperty Name="AxRecId" ColumnName="AxRecId" />
+                <ScalarProperty Name="PartyId" ColumnName="PartyId" />
+                <ScalarProperty Name="CargoType" ColumnName="CargoType" />
+                <ScalarProperty Name="TEMTrackingNum" ColumnName="TEMTrackingNum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="TEMCargo_ililcekodlari">
+            <EntityTypeMapping TypeName="UPSIntegrationModel.TEMCargo_ililcekodlari">
+              <MappingFragment StoreEntitySet="TEMCargo_ililcekodlari">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="il" ColumnName="il" />
+                <ScalarProperty Name="ilce_Semt" ColumnName="ilce_Semt" />
+                <ScalarProperty Name="il_kodu" ColumnName="il_kodu" />
+                <ScalarProperty Name="ilceSemt_kodu" ColumnName="ilceSemt_kodu" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UPSCargoililcekodlari">
+            <EntityTypeMapping TypeName="UPSIntegrationModel.UPSCargoililcekodlari">
+              <MappingFragment StoreEntitySet="UPSCargoililcekodlari">
+                <ScalarProperty Name="CargoType" ColumnName="CargoType" />
+                <ScalarProperty Name="ilceKodu" ColumnName="ilceKodu" />
+                <ScalarProperty Name="ilKodu" ColumnName="ilKodu" />
+                <ScalarProperty Name="ilce" ColumnName="ilce" />
+                <ScalarProperty Name="il" ColumnName="il" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,461 @@
+﻿@{
+    ViewBag.Title = "HomePage";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+@model List<UPSWebService.Models.UPSCargoililcekodlari>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Casper-UPS</title>
+    <!-- Bootstrap Core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <!-- MetisMenu CSS -->
+    <link href="~/vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link href="~/dist/css/sb-admin-2.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href="~/vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script src="https://code.jquery.com/jquery-3.2.1.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous">
+    //AJAX KULLANICAKSAN KESİNLİKLE BU JQUERY KODUNU EKLE !!!
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+    <style>
+        .ajax-loader {
+            visibility: hidden;
+            background-color: rgba(255,255,255,0.7);
+            position: absolute;
+            z-index: +100 !important;
+            width: 100%;
+            height: 100%;
+        }
+
+            .ajax-loader img {
+                position: relative;
+                top: 50%;
+                left: 50%;
+            }
+
+          .divFrame{
+            background-color: lightgrey;
+            width: 400px;
+            border: 5px solid green;
+            padding: 25px;
+            margin: 25px;
+          }
+    </style>
+
+</head>
+<body>
+   
+    <div id="wrapper">
+        <!-- Navigation -->
+        @*<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Casper - UPS</a>
+            </div>
+            <!-- /.navbar-header -->
+
+        </nav>
+        <div id="page-wrapper">
+            <div class="row">
+                <div class="col-lg-12">
+                    <h3 class="page-header">UPS VIP Servis</h3>
+                </div>
+                <!-- /.col-lg-12 -->
+            </div>
+            <!-- /.row -->
+            
+            <!-- /.row -->
+        </div>*@
+        <!-- /#page-wrapper -->
+
+        <div class="row" id="ROWPANEL">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>Jet Servis Talep Formu</b>
+                        <a href="http://www.casper.com.tr/arizali-urun-takip" class="btn btn-primary btn-sm pull-right">Arızalı Ürün Takibi</a>
+                        <div class="pull-right"> <p style="white-space:pre"> </p></div>
+                        <button class="btn btn-primary btn-sm pull-right" id="TrackingNumShow">Takip Numaranı Öğren</button>
+                    </div>
+                    <div class="panel-body" style="background-color: whitesmoke">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="hidden" id="cargoType" value="1" name="name" />
+                                    <div class="alert  alert-info">
+                                        <input type="image" class="pull-right" src="../img/kargo.png" name="name" value="" style="width:30px;height:30px" />
+
+                                        <b>JET SERVİS - Kargo </b>
+                                    </div>
+                                    @*<button class="btn btn-primary btn-lg btn-block" id="cargoType" value="1" style="height:100px">JET SERVİS - Kargo </button>*@
+                                    @*<select id="cargoType" class="form-control">
+                                        <option value="1">Turbo Servis</option>
+                                        <option value="2">Jet Turbo Servis</option>
+                                    </select>*@
+                                </div>
+                                <div class="form-group">
+                                    <label>Ad - Soyad</label>
+                                    <input class="form-control" placeholder="Lütfen Adınızı Giriniz" id="ShipperName">
+                                </div>
+                                <div class="form-group">
+                                    <label>Tel</label>
+                                    <input type="text" class="form-control" placeholder="Lütfen Telefon Numaranızı Giriniz" id="ShipperPhoneNumber" onkeypress="return isNumber(event)" min="0" maxlength="11">
+                                    <p>(Örn: 05XXXXXXX98) (**Kargo Şirketi sizi arayarak uygun olduğunuz saati öğrenecektir. Bu nedenle size ulaşılabilecek telefon numarasını doğru şekilde girmeniz önemlidir.)</p>
+                                </div>
+                                <div class="form-group">
+                                    <label>Mail</label>
+                                    <input class="form-control" placeholder="Lütfen Mail Adresinizi Giriniz" id="ShipperEMail">
+                                </div>
+                                <div class="form-group">
+                                    <label>İl Seç:</label>
+                                    <select class="form-control" id="ShipperCityCode">
+                                        @foreach (var item in Model)
+                                        {
+                                            <option value="@item.ilKodu">@item.il</option>
+                                        }
+                                    </select>
+                                </div>
+                                <div class="form-group" id="ShipperArea">
+                                    <label>İlçe seç:</label>
+                                    <select class="form-control">
+                                        <option value=""></option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Adres</label>
+                                    <textarea class="form-control" rows="3" maxlength="254" placeholder="Lütfen Açık Adres Giriniz" id="ShipperAddress"></textarea>
+                                </div>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <label>IMEI NO</label>
+                                    <input type="text" class="form-control" id="ShipperSerialNumber" maxlength="20" style="text-transform: uppercase;" placeholder="Lütfen Telefonunuzun 15 Haneli Imei Numarasını Giriniz">
+                                </div>
+                                <div class="form-group">
+                                    <label>Arıza Açıklama</label>
+                                    <textarea class="form-control" id="ShipperDescription" rows="3" maxlength="254" placeholder="Lütfen cihaz ile alakalı yaşamış olduğunuz sorunları detaylı bir şekilde açıklayınız.."></textarea>
+                                </div>
+
+                                <br />
+                                <p><h5>(**Şarj arızaları için cihazı şarj aleti ile birlikte göndermeniz gerekmektedir.)</h5></p>
+                                <p><h5>(**Teslim edeceğiniz cihazı hasar görmeyecek şekilde paketlemeniz önemlidir.)</h5></p>
+                                <br />
+                                <div id="InformationText">
+
+                                </div>
+                                @*Okudum Onaylıyorum: <input type="checkbox" name="ApprovalText" id="ApprovalText" value="" />*@
+                                <br />
+                                <br />
+                                @*<div class="form-group">
+                                    <label>Cihazın service durumu hakkında sizinle nasıl iletişime geçelim?</label>
+                                    <div class="checkbox">
+                                        <label>
+                                            <input type="checkbox" id="NoneContact" > İletişim istemiyorum
+                                        </label>
+                                    </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="EmailContact"> E-Mail ile
+                                            </label>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" id="SMSContact"> SMS ile
+                                            </label>
+                                        </div>
+                                </div>*@
+                                <button id="Send" class="btn btn-primary">Gönder</button>
+
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+        <div class="row" id="ROWPANEL2">
+            <div class="col-lg-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <b>Jet Servis Talep Formu</b>
+                        <a href="http://www.casper.com.tr/arizali-urun-takip" class="btn btn-primary btn-sm pull-right">Arızalı Ürün Takibi</a>
+                        <div class="pull-right"> <p style="white-space:pre"> </p></div>
+                        <button class="btn btn-primary btn-sm pull-right " id="MainFormShow">Jet Talep Formu</button>
+                    </div>
+                    <div class="panel-body" style="background-color: whitesmoke">
+                        <div class="row">
+                            <div class="col-lg-6">
+                                <div class="form-group">
+                                    <input type="hidden" id="cargoType" value="2" name="name" />
+                                    <div class="alert alert-info">
+                                        <input type="image" class="pull-right" src="../img/moto.png" name="name" value="" style="width:30px;height:30px" />
+
+                                        <b>JET SERVİS - Kargo</b>
+                                    </div>
+                                    @*<button class="btn btn-primary btn-lg btn-block" id="cargoType" value="2" style="height:100px" >TURBO SERVİS – Moto Kurye</button>*@
+                                    @*<label>Kargo Tipi</label>
+                                    <select id="cargoType" class="form-control">
+                                        <option value="1">Turbo Servis</option>
+                                        <option value="2">Jet Turbo Servis</option>
+                                    </select>*@
+                                </div>
+                                <div class="form-group">
+                                    <label>IMEI NO</label>
+                                    <input type="text" class="form-control" id="ShipperSerialNumberQuery" maxlength="20" style="text-transform: uppercase;" placeholder="Lütfen Telefonunuzun 15 Haneli Imei Numarasını Giriniz">
+                                </div>
+                                <button class="btn btn-primary" id="TrackingNumFind">Sorgula</button>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                            <div class="col-lg-6">
+                                <br />
+                                <br />
+                                <br />
+                                <br />
+                                <div id="InformationTextCheck">
+
+                                </div>
+                            </div>
+                            <!-- /.col-lg-6 (nested) -->
+                        </div>
+                        <!-- /.row (nested) -->
+                    </div>
+                    <!-- /.panel-body -->
+                </div>
+                <!-- /.panel -->
+            </div>
+            <!-- /.col-lg-12 -->
+        </div>
+
+    </div>
+    <!-- /#wrapper -->
+    <!-- jQuery -->
+    <script src="~/vendor/jquery/jquery.min.js"></script>
+    <!-- Bootstrap Core JavaScript -->
+    <script src="~/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <!-- Metis Menu Plugin JavaScript -->
+    <script src="~/vendor/metisMenu/metisMenu.min.js"></script>
+    <!-- Custom Theme JavaScript -->
+    <script src="~/dist/js/sb-admin-2.js"></script>
+</body>
+</html>
+
+
+
+<script type="text/javascript" language="javascript">
+    
+    $(document).ready(function () {
+        
+        $("#ROWPANEL2").hide();
+
+        Getil_ilce();
+
+        $("#ShipperCityCode").change(function () {
+
+            Getil_ilce();
+
+        });
+
+        $("#Send").click(function () {
+
+            SendData();
+
+        });
+
+
+        $("#TrackingNumShow").click(function () {
+
+            $("#ROWPANEL").hide();
+            $("#ROWPANEL2").show();
+
+        }); MainFormShow
+        $("#MainFormShow").click(function () {
+
+            $("#ROWPANEL").show();
+            $("#ROWPANEL2").hide();
+
+        });
+
+        $("#TrackingNumFind").click(function () {
+
+            CheckTarackingNum();
+
+        });
+
+
+    });
+
+    function CheckTarackingNum() {
+        var IMEI = $("#ShipperSerialNumberQuery").val();
+
+
+        $.ajax({
+            url: '/Home/CheckTarackingNum?imei=' + IMEI + '&cargoType=1', // (cargoType=1-UPS)(cargoType=2 TEM)
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $("#InformationTextCheck").empty();
+                var Result = "<p ><h5 style='color:red' > " + data + "</h5></p>";
+                $("#InformationTextCheck").append(Result);
+                location.href = '#'
+            }
+        });
+
+    }
+
+    function SendData()
+    {
+        var ShipperName = $("#ShipperName").val();
+        var ShipperPhoneNumber = $("#ShipperPhoneNumber").val();
+        var ShipperEMail = $("#ShipperEMail").val();
+        var ShipperCityCode = $("#ShipperCityCode").val();
+        var ShipperAreaCode = $("#ShipperAreaCode").val();
+        var ShipperAddress = $("#ShipperAddress").val();
+        var ShipperSerialNumber = $("#ShipperSerialNumber").val();
+        var ShipperDescription = $("#ShipperDescription").val();
+        var cargoType = $("#cargoType").val();
+        var ShipperContactType = 0;
+
+
+        var KargoTipi = "";
+        if (cargoType == 1) {
+            KargoTipi = "Jet Servis";
+        }
+        else if (cargoType == 2) {
+            KargoTipi = "Turbo Servis";
+        }
+        
+
+        if (ShipperName == null || ShipperName == "" || ShipperName == " ") {
+            return alert("Ad Soyad boş olamaz !");
+        }
+        else if (ShipperPhoneNumber == null || ShipperPhoneNumber == "" || ShipperPhoneNumber == " ") {
+            return alert("Telefon boş olamaz !");
+        }
+        else if (ShipperEMail == null || ShipperEMail == "" || ShipperEMail == " ") {
+            return alert("Email boş olamaz !");
+        }
+        else if (ShipperAddress == null || ShipperAddress == "" || ShipperAddress == " ") {
+            return alert("Adres boş olamaz !");
+        }
+        else if (ShipperSerialNumber == null || ShipperSerialNumber == "" || ShipperSerialNumber == " ") {
+            return alert("IMEI NO boş olamaz !");
+        }
+        else if (ShipperDescription == null || ShipperDescription == "" || ShipperDescription == " ") {
+            return alert("Açıklama boş olamaz !");
+        }
+
+
+        $.ajax({
+
+            beforeSend: function () {
+                $('.ajax-loader').css("visibility", "visible");
+            },
+
+            url: '/Home/AddInfoService?ShipperName=' + ShipperName + '&ShipperAddress=' + ShipperAddress + '&ShipperCityCode=' + ShipperCityCode + '&ShipperAreaCode=' + ShipperAreaCode + '&ShipperPhoneNumber=' + ShipperPhoneNumber + '&ShipperEMail=' + ShipperEMail + '&ShipperSerialNumber=' + ShipperSerialNumber + '&ShipperDescription=' + ShipperDescription + '&ShipperContactType=' + ShipperContactType + '&cargoType=' + cargoType,
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                $("#InformationText").empty();
+                var Result = "<p ><h5 style='color:red' > " + data + "</h5></p>";
+                $("#InformationText").append(Result);
+                location.href = '#'
+            },
+
+            complete: function () {
+                $('.ajax-loader').css("visibility", "hidden");
+            }
+
+        });
+    }
+
+    function Getil_ilce()
+    {
+        var ilKodu = $("#ShipperCityCode").val();
+
+        $("#ShipperArea").empty();
+
+        $.ajax({
+            url: '/Home/Getilce?ilKodu=' + ilKodu + '',
+            type: 'POST',
+            dataType: 'json',
+            success: function (data) {
+                var Result = "<label>İlçe seç:</label>";
+                Result += "<select class='form-control' id='ShipperAreaCode'>";
+                $.each(data, function (i, item) {
+                    Result += "<option value=" + item.ilceKodu + ">" + item.ilce + "</option>";
+                });
+                Result += "</select>";
+
+                $("#ShipperArea").append(Result);
+            }
+        });
+
+    }
+
+    //function clearAllText() {
+        
+    //    $("#ShipperName").val("");
+    //    $("#ShipperPhoneNumber").val("");
+    //    $("#ShipperEMail").val("");
+    //    $("#ShipperCityCode").val("");
+    //    $("#ShipperAreaCode").val("");
+    //    $("#ShipperAddress").val("");
+    //    $("#ShipperSerialNumber").val("");
+    //    $("#ShipperDescription").val("");
+    //    $("#cargoType").val("");
+
+    //    $("#ShipperName").attr("disabled", true);
+    //    $("#ShipperPhoneNumber").attr("disabled", true);
+    //    $("#ShipperEMail").attr("disabled", true);
+    //    $("#ShipperCityCode").attr("disabled", true);
+    //    $("#ShipperAreaCode").attr("disabled", true);
+    //    $("#ShipperAddress").attr("disabled", true);
+    //    $("#ShipperSerialNumber").attr("disabled", true);
+    //    $("#ShipperDescription").attr("disabled", true);
+    //    $("#cargoType").attr("disabled", true);
+    //}
+
+    function isNumber(evt) {
+        evt = (evt) ? evt : window.event;
+        var charCode = (evt.which) ? evt.which : evt.keyCode;
+        if (charCode > 31 && (charCode < 48 || charCode > 57)) {
+            return false;
+        }
+        return true;
+    }
+
+</script>
+
+
+
+
+
+

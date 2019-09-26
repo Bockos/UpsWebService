@@ -1,0 +1,798 @@
+﻿@{
+    Layout = null;
+}
+
+
+
+
+
+
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head id="1095_Head1">
+    <title>
+        CASPER
+    </title>
+    <link id="1095_CssShared" type="text/css" rel="stylesheet" href="http://www.casper.com.tr/Skins/shared/Shared.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.casper.com.tr/_ui/css/styles.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.casper.com.tr/_ui/css/fonts.css" />
+    <link rel="stylesheet" type="text/css" href="http://www.casper.com.tr/_ui/css/landing.css" />
+    <link id="1095_CssLink" type="text/css" rel="stylesheet" href="http://www.casper.com.tr/skins/casper/styles.css?tmp=9-13-15" />
+    <link id="1095_CssCustom" type="text/css" rel="stylesheet" href="http://www.casper.com.tr/skins/casper/style_custom.css?tmp=9-13-15" />
+    <script src="http://www.casper.com.tr/Scripts/jquery.js" type="text/javascript"></script>
+    <script type="text/javascript" src="_ui/js/vendors/jquery.jscrollpane.min.js"></script>
+    <script type="text/javascript" src="_ui/js/main.js"></script>
+
+
+    <script language="javascript" src="/script.js?tmp=9-13-15" type="text/javascript"></script>
+
+    <script src="http://www.casper.com.tr/skins/shared/js/jquery.ba-dotimeout.min.js" type="text/javascript"></script>
+    <meta content="index,follow" name="ROBOTS" />
+    <meta content="ALL" name="ROBOTS" />
+    <meta http-equiv="imagetoolbar" content="no" />
+    <meta content="Kobimaster.com ve Sanal Mağazacılık Hizmetleri A.Ş. © 2006 " name="Copyright" />
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8" />
+    <meta http-equiv="content-language" content="TR" />
+    <meta name="keywords" content=".." />
+    <meta name="description" content="arizali-urun-takip" />
+    <script type="text/javascript">
+      var kmCurrentTrans = null;
+      var kmTransItems = null;
+    </script>
+    <script type="text/javascript" src="http://www.casper.com.tr/Scripts/KMPopup/jquery.mousewheel-3.0.6.pack.js"></script>
+    <script type="text/javascript" src="http://www.casper.com.tr/Scripts/KMPopup/jquery.fancybox.js"></script>
+    <link rel="stylesheet" type="text/css" href="http://www.casper.com.tr/Scripts/KMPopup/jquery.fancybox.css" />
+    <script type="text/javascript">
+
+
+$(document).ready(function () {
+$(".popup-link").fancybox({
+openEffect: 'elastic',
+closeEffect: 'elastic',
+scrolling: 'auto',
+easingIn: 'easeOutBounce',
+easingOut: 'easeInBack',
+padding: 10,
+'type': 'iframe',
+height: 400,
+'scrolling'   : 'no'
+});
+
+$(".popup-image").fancybox({
+openEffect: 'elastic',
+closeEffect: 'elastic',
+scrolling: 'auto',
+easingIn: 'easeOutBounce',
+easingOut: 'easeInBack',
+padding: 10,
+});
+
+$(".popup-gallery").fancybox({
+openEffect: 'elastic',
+closeEffect: 'elastic',
+scrolling: 'auto',
+easingIn: 'easeOutBounce',
+easingOut: 'easeInBack',
+padding: 20,
+});
+
+     })
+    </script>
+
+    <script type="text/javascript">
+         $(document).ready(function () {
+             $("ul.KmDefaultMenu > li").hover(
+        function () {
+            $("ul.KmDefaultMenu > li > a").removeClass("Active");
+            $("ul.KmDefaultMenu > li ul").stop().css("display", "none");
+            $(this).stop().children("a").siblings("ul").slideDown(200);
+            $(this).stop().children("a").addClass("Active");
+        },
+        function () {
+            $("ul.KmDefaultMenu > li ul").stop().css("display", "none");
+            $("ul.KmDefaultMenu > li > a").removeClass("Active");
+        });
+             /*menuLength = $("ul.KmDefaultMenu > li").index();
+             $("ul.KmDefaultMenu > li").eq(menuLength).children("ul").css("left", "auto");
+             $("ul.KmDefaultMenu > li").eq(menuLength - 1).children("ul").css("left", "auto");
+             $("ul.KmDefaultMenu > li").eq(menuLength).children("ul").css("right", "0");
+             $("ul.KmDefaultMenu > li").eq(menuLength - 1).children("ul").css("right", "0");*/
+         });
+    </script>
+</head>
+
+<body class="content-page content1095">
+    <div class="ajax-loader">
+        <img src="../img/ajax-loader.gif" class="img-responsive" />
+    </div>
+    <script language="javascript" type="text/javascript">
+    $(document).ready(function () {
+        $.ajax({
+            type: "POST",
+            url: "/KMServices/WSUIHelper.asmx/GetShoppingCartItemCount",
+            data: '{}',
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function (msg) {
+                $('#spanbasket').text(msg.d + " ürün var");
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                $('#spanbasket').text("");
+            }
+
+        });
+
+
+
+        $('ul.ProductsMenu').each(function () {
+            var nav = $(this);
+            nav
+    .mouseover(function (e) {
+        nav.doTimeout('li', 250, over, e.target);
+    }).mouseout(function () {
+        nav.doTimeout('li', 250, out);
+    });
+
+            function over(elem) {
+                var parent = $(elem).closest('li');
+
+                out(parent);
+                parent.children('a').addClass('hover');
+                /*parent.children( 'ul:hidden' ).slideDown( 'fast' );*/
+                parent.children('ul:hidden').fadeIn('fast');
+            };
+
+            function out(elem) {
+                var parents = elem
+      ? $(elem).closest('li').siblings()
+      : nav.children();
+
+
+                parents.children('a').removeClass('hover');
+                parents.children('ul').hide();
+            };
+
+        });
+
+        /*load first sub*/
+        $('ul.ProductsMenu > li > ul > li:first-child > ul').show();
+        $('ul.ProductsMenu > li > ul > li:first-child > a').addClass("hover");
+
+    });
+    </script>
+    <script language="javascript" type="text/javascript">
+    var UserWelcomeMessage = "";
+    </script>
+
+    @*<form name="aspnetForm" method="post" action="/arizali-urun-takip" id="aspnetForm">*@
+        <div>
+            <input type="hidden" name="1095_SM_HiddenField" id="1095_SM_HiddenField" value="" />
+            <input type="hidden" name="__EVENTTARGET" id="__EVENTTARGET" value="" />
+            <input type="hidden" name="__EVENTARGUMENT" id="__EVENTARGUMENT" value="" />
+            <input type="hidden" name="__LASTFOCUS" id="__LASTFOCUS" value="" />
+            <input type="hidden" name="__VIEWSTATE" id="__VIEWSTATE" value="/wEPDwUKLTUxNTE1MDUyOA9kFgJmD2QWBGYPZBYGAgUPFgIeBGhyZWYFJC9za2lucy9jYXNwZXIvc3R5bGVzLmNzcz90bXA9OS0xMy0xNWQCBg8WAh8ABSovc2tpbnMvY2FzcGVyL3N0eWxlX2N1c3RvbS5jc3M/dG1wPTktMTMtMTVkAggPFgIeBFRleHQFXTxzY3JpcHQgbGFuZ3VhZ2U9ImphdmFzY3JpcHQiIHNyYz0iL3NjcmlwdC5qcz90bXA9OS0xMy0xNSIgIHR5cGU9InRleHQvamF2YXNjcmlwdCIgPjwvc2NyaXB0PmQCAg8WAh4GYWN0aW9uBRMvYXJpemFsaS11cnVuLXRha2lwFggCBA9kFgICAw9kFgZmDxYCHgdWaXNpYmxlZxYCAgEPZBYCZg8PFgIfA2hkZAICDxYCHwNnFgICAQ9kFgJmDw8WAh8DaGRkAgQPFgIfA2cWAgIBD2QWAgIBD2QWAmYPZBYCAgcPDxYEHwFlHgdFbmFibGVkaGRkAgUPZBYCZg8WAh8DaGQCBg9kFgJmDxYCHwNoZAIHDxYCHwEFtwE8YSBpZD0ia21zaWduODk3NzY0IiBocmVmPSJodHRwOi8vd3d3LmtvYmltYXN0ZXIuY29tIiB0YXJnZXQ9Il9ibGFuayIgdGl0bGU9IktvYmlNYXN0ZXIgRS1UaWNhcmV0IiBzdHlsZT0iZm9udC1zaXplOjExcHg7IiA+PHN0cm9uZyBzdHlsZT0iZm9udC13ZWlnaHQ6bm9ybWFsIj5Lb2JpTWFzdGVyPC9zdHJvbmc+PC9hPiBkGAEFHl9fQ29udHJvbHNSZXF1aXJlUG9zdEJhY2tLZXlfXxYDBScxMDk1JFBvcnRhbENvbnRlbnQkY3RsMDAkY3RsMDAkUkJTZXJpTm8FJzEwOTUkUG9ydGFsQ29udGVudCRjdGwwMCRjdGwwMCRSQkZvcm1ObwUnMTA5NSRQb3J0YWxDb250ZW50JGN0bDAwJGN0bDAwJFJCRm9ybU5vwdtv5mov1vqNLYfab1K5TZ2g50TGp4uanJ3MWEF2Dms=" />
+        </div>
+
+        <script type="text/javascript">
+//<![CDATA[
+var theForm = document.forms['aspnetForm'];
+if (!theForm) {
+    theForm = document.aspnetForm;
+}
+function __doPostBack(eventTarget, eventArgument) {
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
+//]]>
+        </script>
+
+
+        <script src="http://www.casper.com.tr/WebResource.axd?d=gORHj0ptKTYG-q4EWJzPuuVc_5spbT26fWqyaQNym-d1cwByKSdUUhmL4xo09zoPCwoAI7BWLaD33fefaVvw11MfwRPCmgwCKn46FcoRXfc1&amp;t=634776696793002537" type="text/javascript"></script>
+
+
+        <script type="text/javascript">
+//<![CDATA[
+var __cultureInfo = {"name":"tr-TR","numberFormat":{"CurrencyDecimalDigits":2,"CurrencyDecimalSeparator":",","IsReadOnly":false,"CurrencyGroupSizes":[3],"NumberGroupSizes":[3],"PercentGroupSizes":[3],"CurrencyGroupSeparator":".","CurrencySymbol":"₺","NaNSymbol":"NaN","CurrencyNegativePattern":8,"NumberNegativePattern":1,"PercentPositivePattern":2,"PercentNegativePattern":2,"NegativeInfinitySymbol":"-Sonsuz","NegativeSign":"-","NumberDecimalDigits":2,"NumberDecimalSeparator":",","NumberGroupSeparator":".","CurrencyPositivePattern":3,"PositiveInfinitySymbol":"Sonsuz","PositiveSign":"+","PercentDecimalDigits":2,"PercentDecimalSeparator":",","PercentGroupSeparator":".","PercentSymbol":"%","PerMilleSymbol":"‰","NativeDigits":["0","1","2","3","4","5","6","7","8","9"],"DigitSubstitution":1},"dateTimeFormat":{"AMDesignator":"","Calendar":{"MinSupportedDateTime":"\/Date(-62135596800000)\/","MaxSupportedDateTime":"\/Date(253402289999999)\/","AlgorithmType":1,"CalendarType":1,"Eras":[1],"TwoDigitYearMax":2029,"IsReadOnly":false},"DateSeparator":".","FirstDayOfWeek":1,"CalendarWeekRule":0,"FullDateTimePattern":"d MMMM yyyy dddd HH:mm:ss","LongDatePattern":"d MMMM yyyy dddd","LongTimePattern":"HH:mm:ss","MonthDayPattern":"d MMMM","PMDesignator":"","RFC1123Pattern":"ddd, dd MMM yyyy HH\u0027:\u0027mm\u0027:\u0027ss \u0027GMT\u0027","ShortDatePattern":"d.M.yyyy","ShortTimePattern":"HH:mm","SortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd\u0027T\u0027HH\u0027:\u0027mm\u0027:\u0027ss","TimeSeparator":":","UniversalSortableDateTimePattern":"yyyy\u0027-\u0027MM\u0027-\u0027dd HH\u0027:\u0027mm\u0027:\u0027ss\u0027Z\u0027","YearMonthPattern":"MMMM yyyy","AbbreviatedDayNames":["Paz","Pzt","Sal","Çar","Per","Cum","Cmt"],"ShortestDayNames":["Pz","Pt","Sa","Ça","Pe","Cu","Ct"],"DayNames":["Pazar","Pazartesi","Salı","Çarşamba","Perşembe","Cuma","Cumartesi"],"AbbreviatedMonthNames":["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara",""],"MonthNames":["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",""],"IsReadOnly":false,"NativeCalendarName":"Gregoryen Takvim","AbbreviatedMonthGenitiveNames":["Oca","Şub","Mar","Nis","May","Haz","Tem","Ağu","Eyl","Eki","Kas","Ara",""],"MonthGenitiveNames":["Ocak","Şubat","Mart","Nisan","Mayıs","Haziran","Temmuz","Ağustos","Eylül","Ekim","Kasım","Aralık",""]},"eras":[1,"MS",null,0]};//]]>
+        </script>
+
+        <script src="http://www.casper.com.tr/ScriptResource.axd?d=6DRYnYjeaoh2WuflJvtqimaACJhjTO_4EoTL8G2IGorXvWpdZhapwJWnE4cSu6Ibhn97BxOahM2Jv1O18dEzef4581MQ44Au7Aya0nZ0AlNZAv2wNMkDSkK4tPzluedz8lq-uzltpiUAm6gIJ4_CtA2&amp;t=ffffffffec54f2d7" type="text/javascript"></script>
+        <script type="text/javascript">
+//<![CDATA[
+if (typeof(Sys) === 'undefined') throw new Error('ASP.NET Ajax client-side framework failed to load.');
+//]]>
+        </script>
+
+        <script src="http://www.casper.com.tr/ScriptResource.axd?d=nx8CDPcYErj1-Fw1V8DQJO9czhqWnyazEIilh5CxBTeMm2O6HPDyS3paMZaDOyvlE098ir5_V2xLlyXn_a9RI4k3wj0xpFb8IQ5Raexhm9VljbKv5cWG1nh1GsHJyV4LpKkvm7f6Ee_KqpX11b9_qw2&amp;t=ffffffffec54f2d7" type="text/javascript"></script>
+        <script src="http://www.casper.com.tr/KMServices/WSUIHelper.asmx/jsdebug" type="text/javascript"></script>
+        <div>
+
+            <input type="hidden" name="__EVENTVALIDATION" id="__EVENTVALIDATION" value="/wEdAAmMRYYmdXa+s0QZBLYwbeBAHKulFS0EfOt8sdspg5W8N1+BtqGGmBVewAFUVUS2pRyZftkyU7ZOxAGdClIUJLq1zBS+bexmZsvCr3DzLmKB2PugKec8rw1AAS9UgkRm4W///D75Urx8OhsSTWSaTIp6T4SAAnULpi8r3ox3iTqxX1SZCznLqIBb73EKiy8cP/h/OEB8b+bJ2JigJe5C4GWtNuNBwiQ9yU16wBJRiIt68A==" />
+        </div>
+        <script type="text/javascript">
+//<![CDATA[
+Sys.WebForms.PageRequestManager._initialize('1095$SM', 'aspnetForm', ['t1095$PortalContent$ctl00$ctl00$UP1',''], [], [], 90, '1095');
+//]]>
+        </script>
+
+        <div class="km-container">
+            <div class="km-wrapper">
+                <div class="km-header cfix">
+
+
+                    <div class="tp-headerlogo">
+                        <a title="Ana Sayfa" href="http://www.casper.com.tr"><img alt="Logo" src="http://www.casper.com.tr/skins/shared/images/logo.png" /></a>
+                    </div>
+
+
+
+                    <div class="tp-headerfree">
+                        <div style="position:absolute; left:230px; top:43px;">
+                            <a href="https://eshop.casper.com.tr/" target="_blank"><img src="http://www.casper.com.tr/uploads/eshop.png" /></a>
+                        </div>
+
+                    </div>
+
+
+
+
+
+
+                    <div class="navbar cfix">
+                        <div class="products-menu">
+                            <ul class="ProductsMenu">
+                                <li>
+                                    <a href="http://www.casper.com.tr/"><span><span>Ürünler</span></span></a>
+                                    <ul>
+                                        <!--sub-->
+                                        <li>
+                                            <a href="http://www.casper.com.tr/excalibur-serisi"><span>Excalibur Serisi</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/g650-g660"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/g650/menu1.jpg" /><span>G650 - G660</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/Excalibur"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/Excalibur/menu1.jpg" /><span>G700 - G850 - G860</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/Excalibur-e800"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/masaustu/E800/menu1.jpg" /><span>E800</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.casper.com.tr/nirvana-dizustu"><span>Nirvana Diz&uuml;st&uuml;</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-f300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/f300/menu1.jpg" /><span>Nirvana F300</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-f600"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/f600/menu1.jpg" /><span>Nirvana F600 - F700</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-f800"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/f800/menu1.jpg" /><span>Nirvana F800</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-c300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/c300/menu1.jpg" /><span>Nirvana C300</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-c500"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/C500/menu1.jpg" /><span>Nirvana C500</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-c600"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/dizustu/C600/menu1.jpg" /><span>Nirvana C600</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-c700"><img alt="" src="/skins/shared/images/urun/dizustu/C700/menu1.jpg" /><span>Nirvana C700</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-c800"><img alt="" src="/skins/shared/images/urun/dizustu/C700/menu1.jpg" /><span>Nirvana C800</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.casper.com.tr/2si1"><span>Nirvana 2si1</span></a>
+                                            <ul>
+                                                <!--
+                                                <li><a
+                                                href="/casper-via-akilli-telefon-a6108"><img alt=""
+                                                src="/skins/shared/images/menu/caspervia.jpg" /><span>Casper
+                                                VIA - A6108</span></a></li>
+                                                -->
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-n310-n240"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/moduler/n310/menu1.jpg" /><span>Nirvana N310 - N240</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-n380"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/moduler/n380/menu1.jpg" /><span>Nirvana N380C</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.casper.com.tr/nirvana-masaustu"><span>Nirvana Masa&uuml;st&uuml;</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-d200"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/masaustu/D200/menu1.jpg" /><span>Nirvana D200</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-d300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/masaustu/D300/menu1.jpg" /><span>Nirvana D300</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-one-nab"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/masaustu/nab/menu1.jpg" /><span>Nirvana One - NAB</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-one-a200-a250"><img alt="" src="http://www.casper.com.tr/skins/shared/Images/urun/masaustu/a250/menu1.jpg" /><span>Nirvana One - A200 - A250</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/nirvana-one-a300"><img alt="" src="http://www.casper.com.tr/skins/shared/Images/urun/masaustu/a300/menu1.jpg" /><span>Nirvana One - A300</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.casper.com.tr/via-telefon"><span>VIA Telefon</span></a>
+                                            <ul>
+                                                <!--
+                                                <li><a
+                                                href="/casper-via-akilli-telefon-a6108"><img alt=""
+                                                src="/skins/shared/images/menu/caspervia.jpg" /><span>Casper
+                                                VIA - A6108</span></a></li>
+                                                -->
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-f1"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/f1/menu1.jpg" /><span>VIA F1</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-a1"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/via-a1/menu1.jpg" /><span>VIA &nbsp;A1</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-a1plus"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/a1plus/menu1.jpg" /><span>VIA &nbsp;A1 Plus</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-p1"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/p1/menu1.jpg" /><span>VIA P1</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-m3"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/m3/menu1.jpg" /><span>VIA &nbsp;M3</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-m2"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/m2/menu1.jpg" /><span>VIA &nbsp;M2</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-m1"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/m1/menu1.jpg" /><span>VIA &nbsp;M1</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-e2"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/e2/menu1.jpg" /><span>VIA &nbsp;E2</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-e1"><img alt="" src="http://www.casper.com.tr/uploads/e1c.jpg" /><span>VIA &nbsp;E1 - E1c</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a href="http://www.casper.com.tr/via-tablet"><span>VIA Tablet</span></a>
+                                            <ul>
+                                                <!--
+                                                <li><a
+
+                                                href="/casper-via-akilli-telefon-a6108"><img alt=""
+                                                src="/skins/shared/images/menu/caspervia.jpg" /><span>Casper
+                                                VIA - A6108</span></a></li>
+                                                -->
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-l8"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/L8/menu1.jpg" /><span>VIA L8</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-s8"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/s8/menu1.jpg" /><span>VIA S8</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-s17"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/s17/menu1.jpg" /><span>VIA S17</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-s18"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/s18/menu1.jpg" /><span>VIA S18</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-s7"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/tablet/s7/menu1.jpg" /><span>VIA S7</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/casper-via-s10"><img alt="" src="http://www.casper.com.tr/skins/shared/Images/urun/tablet/S10/menu1.jpg" /><span>VIA S10</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="shopping-menu">
+                            <ul class="ProductsMenu">
+                                <li>
+                                    <a href="http://www.casper.com.tr/kurumsal-cozumler"><span><span>Kurumsal</span></span></a>
+                                    <ul>
+                                        <!--sub-->
+                                        <li>
+                                            <a><span>Masa&uuml;st&uuml;</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-l200"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROL200/menu1.jpg" /><span>Casper Pro L200</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-l300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROL300/menu1.jpg" /><span>Casper Pro L300</span></a>
+                                                </li>
+                                                <li>
+                                                    &nbsp;
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-k400a"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROK400/menu1.jpg" /><span>Casper Pro K400A</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-k600a"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROK600/menu1.jpg" /><span>Casper Pro K600A</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-k800a"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROK800/menu1.jpg" /><span>Casper Pro K800A</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-n400b"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPRON400/menu1.jpg" /><span>Casper Pro N700</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-n600b"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPRON600/menu1.jpg" /><span>Casper Pro N600B</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-n800b"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPRON800/menu1.jpg" /><span>Casper Pro N800B</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a><span>Diz&uuml;st&uuml;</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-p300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROP300/menu1.jpg" /><span>Casper Pro P300</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-p500"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROP500/menu1.jpg" /><span>Casper Pro P500</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-p700"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROP700/menu1.jpg" /><span>Casper Pro P700</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-p800"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROP800/menu1.jpg" /><span>Casper Pro P800</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a><span>İş İstasyonu</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-pc5"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROPC5/menu1.jpg" /><span>Casper Pro PC5</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-pcs"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROPC5/menu1.jpg" /><span>Casper Pro PCS</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-ph5"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROPH5/menu1.jpg" /><span>Casper Pro PH5</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-phs"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROPH5/menu1.jpg" /><span>Casper Pro PHS</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a><span>T&uuml;mleşik Bilgisayar</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-t100"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROT100/menu1.jpg" /><span>Casper Pro T100</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-t200"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROT200/menu1.jpg" /><span>Casper Pro T200</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-t250"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROT250/menu1.jpg" /><span>Casper Pro T250</span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-t300"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPROT300/menu1.jpg" /><span>Casper Pro T300</span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            <a><span>Monit&ouml;r</span></a>
+                                            <ul>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-185"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPRO185WLEDMonitor/menu1.jpg" /><span>Casper PRO 18.5&rdquo; LED </span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-215"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/Casper215WKurumsalMonitor/menu1.jpg" /><span>Casper PRO 21.5&rdquo; LCD </span></a>
+                                                </li>
+                                                <li>
+                                                    <a href="http://www.casper.com.tr/pro-23w"><img alt="" src="http://www.casper.com.tr/skins/shared/images/urun/kurumsal/CasperPRO23WLEDMonitor/menu1.jpg" /><span>Casper PRO 23.6&rdquo; LED </span></a>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </div>
+                        <div class="others-menu">
+
+
+
+                            <ul class="KmDefaultMenu">
+
+                                <li class="menu583">
+                                    <a href="http://www.casper.com.tr" title="Casper">
+                                        <span><span>Casper</span></span>
+                                    </a>
+
+
+                                    <ul>
+
+                                        <li class="menu818">
+                                            <a href="http://www.casper.com.tr/hakkimizda" title="Hakkımızda">
+                                                <span>Hakkımızda</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu819">
+                                            <a href="http://www.casper.com.tr/insan-kaynaklari" title="İnsan Kaynakları">
+                                                <span>İnsan Kaynakları</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu1000">
+                                            <a href="http://www.casper.com.tr/bayilik" title="Bayilik Başvurusu">
+                                                <span>Bayilik Başvurusu</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu2131">
+                                            <a href="//www.belgemodul.com/sirket/567" title="Bilgi Toplumu Hizmetleri">
+                                                <span>Bilgi Toplumu Hizmetleri</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <li class="menu753">
+                                    <a href="http://www.casper.com.tr/destek" title="Destek">
+                                        <span><span>Destek</span></span>
+                                    </a>
+
+
+                                    <ul>
+
+                                        <li class="menu874">
+                                            <a href="http://www.casper.com.tr/arizali-urun-takip" title="Arızalı Ürün Takibi">
+                                                <span>Arızalı Ürün Takibi</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu875">
+                                            <a href="http://www.casper.com.tr/yazilim-ve-surucu-arama" title="Sürücü İndirme">
+                                                <span>Sürücü İndirme</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu876">
+                                            <a href="http://www.casper.com.tr/sikca-sorulan-sorular" title="Sıkça Sorulan Sorular">
+                                                <span>Sıkça Sorulan Sorular</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu877">
+                                            <a href="http://www.casper.com.tr/w10-upgrade" title="Windows 10 Yükseltme">
+                                                <span>Windows 10 Yükseltme</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu878">
+                                            <a href="http://www.casper.com.tr/garanti-kosullari" title="Garanti Koşulları">
+                                                <span>Garanti Koşulları</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu880">
+                                            <a href="http://www.casper.com.tr/bayii-arama" title="Bayi/Servis Arama">
+                                                <span>Bayi/Servis Arama</span>
+                                            </a>
+                                        </li>
+
+                                        <li class="menu881">
+                                            <a href="http://www.casper.com.tr/kilavuzlar" title="Kılavuzlar">
+                                                <span>Kılavuzlar</span>
+                                            </a>
+                                        </li>
+
+                                    </ul>
+
+                                </li>
+
+
+                                <li class="menu754">
+                                    <a href="http://www.casper.com.tr/bize-ulasin" title="Bize Ulaşın">
+                                        <span><span>Bize Ulaşın</span></span>
+                                    </a>
+
+
+                                </li>
+
+                            </ul>
+
+
+                        </div>
+
+
+
+
+
+
+
+                    </div>
+
+
+                </div>
+                <!--/km-header-->
+
+                @RenderBody()
+
+                <div class="km-footer cfix">
+
+
+
+
+
+
+
+                    <div class="fleft">
+
+
+
+                        @*<ul class="FooterHorizontalMenu cfix">
+
+
+                                <li class="menu611">
+                                    <a href="/" title="Ana Sayfa">
+                                        <span><span>Ana Sayfa</span></span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li class="menu612">
+                                    <a href="/yasal-haklar-ve-gizlilik" title="Yasal Haklar & Gizlilik">
+                                        <span><span>Yasal Haklar & Gizlilik</span></span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li class="menu910">
+                                    <a href="/insan-kaynaklari" title="İnsan Kaynakları">
+                                        <span><span>İnsan Kaynakları</span></span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li class="menu613">
+                                    <a href="/site-haritasi" title="Site Haritası">
+                                        <span><span>Site Haritası</span></span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li class="menu614">
+                                    <a href="/destek" title="Destek">
+                                        <span><span>Destek</span></span>
+                                    </a>
+
+
+                                </li>
+
+
+                                <li class="menu616">
+                                    <a href="/bize-ulasin" title="İletişim">
+                                        <span><span>İletişim</span></span>
+                                    </a>
+
+
+                                </li>
+
+                            </ul>*@
+
+
+                        <div class="tp-footerfree cfix">
+                            <img src="http://www.casper.com.tr/skins/shared/Images/intellogo.png" alt="İntel" />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;© 2013 Casper A.Ş. Tüm Hakları Saklıdır.
+
+                        </div>
+
+                    </div>
+
+                    <div class="right">
+
+                        <div class="tp-footersocial">
+                            <p>
+                                <span>Bizi Takip Edin...</span> <a class="twitter-follow-button" data-lang="tr" data-show-count="false" data-show-screen-="" data-size="large" href="https://twitter.com/casperturkiye" name="false">Takip et: casperturkiye</a>
+                                <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script><br />
+                                <a href="http://Instagram.com/casper.turkiye" target="new"><img border="0" src="http://www.casper.com.tr/skins/shared/images/icon-instagram.png" /></a>
+                                <a href="https://www.facebook.com/casperbilgisayar" target="_blank"><img alt="Facebook" src="http://www.casper.com.tr/skins/shared/images/icon-facebook.png" /></a> <a href="https://www.pinterest.com/casperturkiye" target="_blank"><img alt="Facebook" src="http://www.casper.com.tr/skins/shared/images/icon-pinterest.png" /></a> <a href="https://plus.google.com/114356459207824777677" rel="publisher" target="_blank"><img alt="Google Plus" src="http://www.casper.com.tr/skins/shared/images/icon-googleplus.png" /></a> <!--<a href="http://www.casper.com.tr/blog/" target="_blank"><img alt="Blog" src="/skins/shared/images/icon-blog.png" /></a>--><a href="http://www.youtube.com/user/casperbilgisayartr" target="_blank"><img alt="YouTube" src="http://www.casper.com.tr/skins/shared/images/icon-youtube.png" /></a> <a href="mailto:info@casper.com.tr" target="_blank"><img alt="Casper E-Mail" src="/skins/shared/images/e-mail-ico.png" /></a>
+                            </p>
+
+                        </div>
+
+
+
+
+
+                        <div class="footer-tel">
+                            <img src="/skins/shared/images/tel.jpg">
+                        </div>
+
+
+
+                    </div>
+
+                </div>
+
+                <span class="km-sign"><a id="kmsign897764" href="http://www.kobimaster.com" target="_blank" title="KobiMaster E-Ticaret" style="font-size:11px;"><strong style="font-weight:normal">KobiMaster</strong></a> </span>
+            </div>
+
+            <!--/km-wrapper-->
+
+        </div>
+
+        <script type="text/javascript"> function setparentvisible(obj, ln){if (obj.parentNode != null  & ln < 3){if (obj.parentNode.style != null) {obj.parentNode.style.visibility='visible';}ln = ln + 1;setparentvisible(obj.parentNode, ln);}} setparentvisible('kmsign897764', 0);</script>
+    @*</form>*@
+
+    <script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-19059508-1']);
+  _gaq.push(['_setDomainName', 'casper.com.tr']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })(); </script> <!-- Facebook Pixel Code -->
+    <script>
+!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;
+n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;
+t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,
+document,'script','https://connect.facebook.net/en_US/fbevents.js');
+fbq('init', '1892406114330108'); // Insert your pixel ID here.
+fbq('track', 'PageView');
+    </script>
+    <noscript>
+        <img height="1" width="1" style="display:none"
+             src="https://www.facebook.com/tr?id=1892406114330108&ev=PageView&noscript=1" />
+    </noscript>
+    <!-- DO NOT MODIFY -->
+    <!-- End Facebook Pixel Code -->
+    <!-- Google Code for Remarketing Tag -->
+    <!--------------------------------------------------
+    Remarketing tags may not be associated with personally identifiable information or placed on pages related to sensitive categories. See more information and instructions on how to setup the tag on: http://google.com/ads/remarketingsetup
+    --------------------------------------------------->
+    <script type="text/javascript">
+/* <![CDATA[ */
+var google_conversion_id = 920733018;
+var google_custom_params = window.google_tag_params;
+var google_remarketing_only = true;
+/* ]]> */
+    </script>
+    <script type="text/javascript" src="//www.googleadservices.com/pagead/conversion.js">
+    </script>
+    <noscript>
+        <div style="display:inline;">
+            <img height="1" width="1" style="border-style:none;" alt="" src="//googleads.g.doubleclick.net/pagead/viewthroughconversion/920733018/?value=0&amp;guid=ON&amp;script=0" />
+        </div>
+    </noscript>
+
+
+</body>
+</html>
