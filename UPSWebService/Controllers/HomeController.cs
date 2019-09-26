@@ -23,7 +23,7 @@ namespace UPSWebService.Controllers
                 var A = db.UPSCargoililcekodlari.ToList();
 
                 List<UPSCargoililcekodlari> B = new List<UPSCargoililcekodlari>();
-                foreach (var item in A) //Veritabanından gelen illeri guruplamak için foreach yazdım..
+                foreach (var item in A) //Veritabanından gelen illeri guruplamak için foreach yazdım...
                 {
                     UPSCargoililcekodlari C = new UPSCargoililcekodlari();
                     C.il = item.il;
